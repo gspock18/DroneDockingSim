@@ -63,12 +63,6 @@ export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$HOME/ardupilot_gazebo/models:
 
 ## Running the Simulation
 
-### Full Bringup
-
-```
-ros2 launch drone_docking_sim bringup_two_drones.launch.py
-```
-
 This starts:
 
 - Gazebo
@@ -77,29 +71,65 @@ This starts:
 
 ### Manual Bringup
 
+Find the correct directory for following files in your device
+
+- /home/***USERNAME***/DroneDockingSim/ros2_ws/src/models/iris_with_ardupilot_1
+- /home/***USERNAME***/DroneDockingSim/ros2_ws/src/models/iris_with_ardupilot_2
+- /home/***USERNAME***/DroneDockingSim/ros2_ws/src/worlds/two_iris.sdf
+
+You will need the correct directory to properly load the simulation
+
 Start up 3 Terminal Instances
+
+***Terminal 2 and 3 should each open a MAVProxy console that displays drone data***
 
 #### Terminal 1 (Gazebo)
 
 ```
-export GZ_SIM_SYSTEM_PLUGIN_PATH=/home/sebgra518/ardupilot_gazebo/build:$GZ_SIM_SYSTEM_PLUGIN_PATH
-export GZ_SIM_RESOURCE_PATH=/home/sebgra518/Documents/GitHub/DroneDockingSim/ros2_ws/src/drone_docking_sim/models:$HOME/ardupilot_gazebo/models:$HOME/ardupilot_gazebo/worlds:$GZ_SIM_RESOURCE_PATH
-export GZ_SIM_SYSTEM_PLUGIN_PATH=$HOME/ardupilot_gazebo/build:$GZ_SIM_SYSTEM_PLUGIN_PATH  # or wherever your ArduPilotPlugin .so is
-gz sim -v4 -r /home/sebgra518/Documents/GitHub/DroneDockingSim/ros2_ws/src/drone_docking_sim/worlds/two_iris.sdf
+export GZ_SIM_SYSTEM_PLUGIN_PATH=$HOME/ardupilot_gazebo/build
+export GZ_SIM_RESOURCE_PATH=$HOME/DroneDockingSim/ros2_ws/src/drone_docking_sim/models:$HOME/DroneDockingSim/ros2_ws/src/drone_docking_sim/worlds:$HOME/ardupilot_gazebo/models:$HOME/ardupilot_gazebo/worlds
+
+gz sim -v4 -r ~/DroneDockingSim/ros2_ws/src/drone_docking_sim/worlds/two_iris.sdf
 ```
 
 #### Terminal 2 (Drone 1)
 
 ```
 cd ~/ardupilot
-sim_vehicle.py -v ArduCopter -f gazebo-iris --model JSON -I0 --console --map --sim-address=127.0.0.1
+source ~/ardupilot_venv/bin/activate
+
+sim_vehicle.py -v ArduCopter -f gazebo-iris --model JSON -I0 --console --map
 ```
 
 #### Terminal 3 (Drone 2)
 
 ```
 cd ~/ardupilot
-sim_vehicle.py -v ArduCopter -f gazebo-iris --model JSON -I1 --console --map --sim-address=127.0.0.1 --sim-port=9012
+source ~/ardupilot_venv/bin/activate
+
+sim_vehicle.py -v ArduCopter -f gazebo-iris --model JSON -I1 --console --map
+```
+#### ***Test Your Drones***
+
+Type the following in Drones 1 and 2 terminals.
+
+```
+mode GUIDED
+arm throttle
+takeoff 5
+```
+_this will let your drones fly 5 meters off the ground_
+
+```
+mode rtl
+LAND
+```
+_this will let your drones land from takeoff spot_
+
+### Full Bringup
+
+```
+ros2 launch drone_docking_sim bringup_two_drones.launch.py
 ```
 
 ## Running the Python Control Script
