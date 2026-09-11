@@ -1,0 +1,20 @@
+#####
+Changelog - Harley Estrella April 24, 2026
+
+1. switched all references for iris_with_standoffs in model.sdf of ardupilot_1 to iris_with_standoffs_2x_scaled
+2. created a parameter file to change the strength of motors of drone
+3. use a different control script to run parameters when using drone_1
+4. created a dock_two_drones.py file to run script of drone2 docking on drone1
+5. use script to run dock_two_drones.py
+
+***changed from vertical to horizontal docking:
+
+6. created folders for STL files made by Sebastian so we can reference them easier in code for gazebo/ros.
+	1.1 See folders in /home/harley-estrella/DroneDockingSim/ros2_ws/src/drone_docking_sim/models: custom_parts, female_drone, male_drone
+
+7. Added 2 files in the ardupilot_gazebo directory models as parent sdf files for drone1 and 2, respectively iris_with_standoffs_male and iris_with_standoffs_female.
+8. Changed 2x drone to a regular sized drone
+9. Added the connectors and attached them to both drones. Drone1 has the male, and drone2 has the female connector by changing the parent sdf files.
+10. Added a new script so that they will mount horizontally and latch onto each other: dock_and_latch.py.
+11. Added a <plugin> code to parent files to allow the drones to dock and latch. - Still haven't gotten this to work.
+

@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <sdf version="1.9">
   <world name="two_iris_world">
-    <physics name="1ms" type="ignore">
+    <physics name="1ms" type="ode">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
     </physics>
@@ -111,18 +111,66 @@
     </model>
  <include> <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground%20Plane</uri> </include>
     <!-- Drone 1 -->
+    #male drone
 <include>
-  <uri>model://iris_with_ardupilot_1</uri>
+  <uri>model://iris_with_ardupilot_0</uri>
   <name>drone1</name>
   <pose>0 0 0.3 0 0 0</pose>
 </include>
 
 <!-- Drone 2 -->
+#female drone
 <include>
   <uri>model://iris_with_ardupilot_2</uri>
   <name>drone2</name>
-  <pose>3 0 0.3 0 0 0</pose>
+  <pose>3 0 0.3 0 0 3.14159</pose>
 </include>
+
+#Introduce Wind Resistance
+
+  <!-- <plugin filename="gz-sim-wind-effects-system"
+    name="gz::sim::systems::WindEffects">
+
+    <horizontal>
+      <magnitude>
+        <time_for_rise>10</time_for_rise>
+        <sin>
+          <amplitude_percent>0.2</amplitude_percent>
+          <period>30</period>
+        </sin>
+        <noise type="gaussian">
+          <mean>0</mean>
+          <stddev>0.1</stddev>
+        </noise>
+      </magnitude>
+
+      <direction>
+        <time_for_rise>10</time_for_rise>
+        <sin>
+          <amplitude>0.3</amplitude>
+          <period>20</period>
+        </sin>
+        <noise type="gaussian">
+          <mean>0</mean>
+          <stddev>0.05</stddev>
+        </noise>
+      </direction>
+    </horizontal>
+
+    <vertical>
+      <magnitude>
+        <time_for_rise>10</time_for_rise>
+        <sin>
+          <amplitude_percent>0.1</amplitude_percent>
+          <period>25</period>
+        </sin>
+        <noise type="gaussian">
+          <mean>0</mean>
+          <stddev>0.05</stddev>
+        </noise>
+      </magnitude>
+    </vertical>
+  </plugin> -->
 
   </world>
 </sdf>

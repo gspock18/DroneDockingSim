@@ -109,6 +109,13 @@ source ~/ardupilot_venv/bin/activate
 
 sim_vehicle.py -v ArduCopter -f gazebo-iris --model JSON -I1 --console --map
 ```
+
+#### Terminal 4 (Script)
+
+```
+cd DroneDockingSim/ros2_ws/Docking_Script_and_Trials
+python slow_dock.py 
+```
 #### ***Test Your Drones***
 
 Type the following in Drones 1 and 2 terminals.
@@ -149,6 +156,13 @@ The script will:
 - Take off to 10 meters
 - Move 10 meters north
 - Land
+
+
+### NEXT STEPS
+
+```
+Once your gazebo can load the 2 drones and can be controlled in the terminals head to the Drone_with_Dockers folder and open Next_Instructions.txt
+```
 
 # Troubleshooting
 

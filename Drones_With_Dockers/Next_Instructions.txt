@@ -1,0 +1,48 @@
+1. Extract Drone_with_Dockers.zip
+2. Copy the following folders to ***your_path***/DroneDockingSim/ros2_ws/src/drone_docking_sim/models
+    a. custom_parts
+    b. female_drone
+    c. male_drone
+    d. iris_with_ardupilot_0
+    e. iris_with_ardupilot_1
+    f. iris_with_ardupilot_2
+3. Copy the following folders to ***your_path***/ardupilot_gazebo/models
+    a. iris_with_standoffs_female
+    b. iris_with_standoffs_male
+    c. iris_with_standoffs_2x_scaled
+4. Copy the following folders to ***your_path***/DroneDockingSim/ros2_ws
+    a. dock_and_latch.py
+    b. dock_two_drones.py 
+
+5. Reload your Simulation. It should now have the 2 drones with connectors facing each other.
+6. Run the following into a new terminal:
+    a. make sure to change the tcp:127.0.0.1:xxxx to match your 2 drones address
+    
+    python3 dock_and_latch.py \
+  --drone1 tcp:127.0.0.1:5762 \ 
+  --drone2 tcp:127.0.0.1:5772 \
+  --takeoff-alt 1.5 \
+  --prelatch-x 0.50 \
+  --final-x 0.12 \
+  --xy-tol 0.03 \
+  --z-tol 0.02 \
+  --attach-topic /model/drone1/detachable_joint/attach
+
+7. As of now, the drones cannot dock on each other with the script. Our next goal is to have a working script that will make them latch onto each other.you paste your iris_with_standoffs_male.sdf, I’ll place the plugin in the exact correct spot and adjust the child_model_link if your child base link is scoped differently.
+
+############
+
+May 18, 2026 Update
+
+Instructions for future of project
+
+Notes: 
+We have resolved the latch and detach issue. What we need now is to change the maximum strength of the rotors in ArduPilot parent iris.
+Later on we need to add weather effects to simulate different wind resistance to see the stability of the lathced drones.
+
+1. Once you've updated your repo, run the same simulation until you've connected to both drones within Gazebo.
+2. Run the following code:
+
+    cd DroneDockingSim/ros2_ws/Docking_Script_and_Trials
+    python slow_dock.py 
+
