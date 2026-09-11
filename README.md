@@ -10,7 +10,7 @@ Changelog - Harley Estrella April 24, 2026
 4. created a dock_two_drones.py file to run script of drone2 docking on drone1
 5. use script to run dock_two_drones.py
 
-***changed from vertical to horizontal docking:
+***changed from vertical to horizontal docking***
 
 6. created folders for STL files made by Sebastian so we can reference them easier in code for gazebo/ros.
 	1.1 See folders in /home/harley-estrella/DroneDockingSim/ros2_ws/src/drone_docking_sim/models: custom_parts, female_drone, male_drone
@@ -73,11 +73,11 @@ Changelog - Harley Estrella September 10, 2026
 
 7. As of now, the drones cannot dock on each other with the script. Our next goal is to have a working script that will make them latch onto each other.you paste your iris_with_standoffs_male.sdf, I’ll place the plugin in the exact correct spot and adjust the child_model_link if your child base link is scoped differently.
 
-############
+#####
 
 May 18, 2026 Update
 
-Instructions for future of project
+***Instructions for future of project***
 
 Notes: 
 We have resolved the latch and detach issue. What we need now is to change the maximum strength of the rotors in ArduPilot parent iris.
